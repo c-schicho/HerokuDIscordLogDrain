@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css')}}">
+    <title>{{APP_NAME}} - Logdrain</title>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        var output = document.getElementById('output');
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '{{ url_for('flask_logs') }}', true);
+        xhr.send();
+        setInterval(function() {
+          output.textContent = xhr.responseText;
+        }, 500);
+      });
+    </script>
+</head>
+<body>
+<div class="body">
+    <h1><a href='{{ APP_URL }}'>{{APP_NAME}}</a> logdrain server</h1>
+    <hr/>
+    <div class="row">
+      <h2>Logging will appear here:</h2>
+        <div class="logging_window">
+            <pre id="output"></pre>
+        </div>
+    </div>
+</div>
+</body>
+</html>

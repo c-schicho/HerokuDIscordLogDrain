@@ -1,0 +1,1 @@
+web: GUNICORN_CMD_ARGS="--capture-output --log-level='info' --log-file='./app/logs/app.log'" gunicorn app:app
